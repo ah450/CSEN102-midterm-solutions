@@ -1,0 +1,228 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+\begin{document}
+\definecolor{orange}{rgb}{1,0.5,0}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+\lstset{
+language=Python,
+numbers=none,
+breaklines=true,
+breakatwhitespace=false,
+frame=single,
+keepspaces=true,
+columns=flexible,
+tabsize=2,
+showspaces=false,
+showstringspaces=false,
+rulecolor=\color{black},
+keywordstyle=\color{blue},
+commentstyle=\color{darkgreen},
+basicstyle=\footnotesize,
+stringstyle=\color{orange}
+}
+\title{CSEN 102 - Midterm 2014 solutions}
+\maketitle
+
+\section{Sequential ALgorithms - Consumer Price Index}
+The formula for calculating the Inflation Rate using the Consumer Price Index (CPI) is relatively simple.
+Assume for the sake of simplicity that the index consists of one item and that in 1984 that item cost 100 dollars. In
+December of 2014 that same item would probably cost 198 dollars.
+Let us calculate the price difference between 1984 and 2014.
+
+
+\begin{itemize}
+  \item Step 1: Calculate How Much has the Consumer Price Index Increased?
+By looking at the above example, common sense would tell us that the index increased (it went from 100 to
+198). The question is how much has it increased?To calculate the change we would take the second number (198) and subtract the first number (100). The
+result would be 98. So we know that from 1984 until 2014 prices increased (Inflated) by 98 points.
+
+  \item Step 2: Comparing the CPI Change to the Original CPI
+Since we know the increase in the Consumer Price Index we still need to compare it to something, so we
+compare it to the price it started at (100). We do that by dividing the increase by the first price or 98/100. the
+result is (.98).
+
+  \item Step 3: Convert it to a Percentage
+This number is still not very useful so we convert it into a percentage. To do that we multiply by 100.
+So the result is a 98\% increase in prices since 1984.
+
+\end{itemize}
+
+Write an algorithm that given two prices of the same item in two different years computes the CPI. The algorithm
+should display the following for the example above
+
+
+The price of the item in year 1984 is 100
+The price of the item in year 2014 is 198
+The CPI is 98\%
+\vfill
+\lstinputlisting{sol_1.py}
+\vfill
+
+
+\section{Conditional Algorithms - Refactoring}
+Given the following algorithm
+
+\lstinputlisting[frame=none]{exercise2_example.py}
+
+
+\begin{enumerate}[label=(\alph*)]
+  \item What are the main drawbacks (disadvantages) of the this algorithm?
+  \begin{description}
+    \item[Solution] \hfill \\
+    All conditions will be checked even if we do not need to check them. Moreover, the last condition includes
+many checks that can be removed if nested-if statements are used or else if (elif) statements.
+  \end{description}
+  \item Rewrite this algorithm to avoid the drawbacks you listed in part a).
+  \begin{description}
+    \item[Solution] \hfill \\
+    \lstinputlisting{sol_2_b.py}
+  \end{description}
+\end{enumerate}
+\vfill
+
+\section{Conditional Algoriths - The sum of rounded numbers}
+Write an algorithm that given three integers displays the sum of their rounded values.
+We will round an integer value to the next multiple of 10 if its rightmost digit is 5 or more, so 15 rounds up to 20.
+Alternately, round down to the previous multiple of 10 if its rightmost digit is less than 5, so 122 rounds down to
+120.
+Here are some examples of evaluating the algorithm on representative input values:
+\begin{verbatim}
+16 17 12 -> 50
+12 13 14 -> 30
+6 4 4 -> 10
+\end{verbatim}
+\lstinputlisting{sol_3.py}
+\vfill
+
+\section{Iterative Algorithms - 362 pattern}
+\begin{enumerate}[label=(\alph*)]
+  \item Write an algorithm that given a list of integers displays true if the list contains a 3, 6, 2 pattern; that is,
+  a value, followed directly by the value plus 3, followed directly by the value minus 1.
+  Here are some examples of evaluating the algorithm on representative input values:
+  \begin{verbatim}
+  {1, 3, 6, 2} -> true
+  {1, 2, 7, 1} -> false
+  {3, 6, 2} -> true
+  {4, 7, 3} -> true
+  {5, 8} -> false
+  {1, 3, 6, 2, 5, 1} -> true
+  \end{verbatim}
+  Your algorithm should stop whenever the pattern is found.
+  \begin{description}
+    \item[Solution] \hfill \\
+    \lstinputlisting{sol_4_a.py}
+  \end{description}
+  \vfill
+  \item Write an algorithm that given a list of integers displays the number of 3, 6, 2 pattern in the list. Here are some examples of evaluating the algorithm on representative input values:
+  \begin{verbatim}
+  {1, 3, 6, 2, 5, 1} -> 2
+  {1, 2, 7, 1} -> 0
+  {3, 6, 2, 5} -> 1
+  {4, 7, 3} -> 1
+  \end{verbatim}
+  \begin{description}
+    \item[Solution] \hfill \\
+    \lstinputlisting{sol_4_b.py}
+  \end{description}
+  \vfill
+\end{enumerate}
+\vfill
+
+
+\section{Iterative Algorithms - Deletion of Bad Pairs}
+\begin{enumerate}[label=(\alph*)]
+\item Write an algorithm that takes a list of numbers and removes any adjacent pair of integers in the list if the
+left element of the pair is larger than the right element of the pair. Please note that every pair’s left element
+is stored in an odd-numbered index in the list, and every pair’s right element is stored in an even-numbered
+index in the list. For example, suppose a list A stores the following element values:
+\begin{verbatim}
+  [3, 7, 9, 2, 5, 5, 8, 5, 6, 3, 4, 7, 3, 1]
+\end{verbatim}
+the algorithm should display the following sequence:
+\begin{verbatim}
+  3 7 5 5 4 7
+\end{verbatim}
+  \begin{description}
+    \item[Solution] \hfill \\
+    \lstinputlisting{sol_5_a.py}
+  \end{description}
+\vfill
+
+\item Assume that the elements of the list are represented now as an integer number. For example, the list
+\begin{verbatim}
+  [3, 7, 9, 2, 5, 5, 8, 5, 6, 3, 4, 7, 3, 1]
+\end{verbatim}
+is now represented as the integer number
+\begin{verbatim}
+  37925585634731
+\end{verbatim}
+You are asked to perform the same task described in Part a) however this time you are not allowed to use
+lists. You have to work on the integer number and your algorithm should display for the number above the
+following result:
+\begin{verbatim}
+  375547
+\end{verbatim}
+\textbf{Note} that the order is important. You are not allowed to display 745573 and \textbf{you are not allowed to use
+neither lists nor strings at all.}
+For simplicity, assume that the number consists of an even number of digits.
+\vfill
+\begin{description}
+  \item[Solution] \hfill \\
+  \lstinputlisting{sol_5_b.py}
+\end{description}
+\end{enumerate}
+
+\section{Tracing Iteration - Mysterious task}
+Given the following algorithm
+\lstinputlisting{example_6.py}
+\begin{enumerate}[label=(\alph*)]
+  \item What is the output of the algorithm above for the following two lists:
+\begin{verbatim}
+  List A: 1 2 5 8 44
+  List B: 2 6 8
+\end{verbatim}
+\vfill
+  Draw a tracing table.
+  \begin{description}
+    \item[Solution] \hfill \\
+     \begin{tabular}{| c | c | c | c | c |}
+     \hline
+     i & j & flag & a[j] & b[i] \\ \hline
+     0 & 0 & True & 1 & 2 \\
+     0 & 1 & True & 2 & 2 \\
+     1 & 2 & True & 5 &  6 \\
+     1 & 3 & True & 8 & 6 \\
+     1 & 3 & False  & & \\
+     \hline
+     \end{tabular}
+     \begin{verbatim}
+       Mysterious No
+     \end{verbatim}
+  \end{description}
+  \item What does the algorithm do for any two sorted (in increasing order) lists A and B, i.e. what is the meaning
+of  ``Mysterious Yes'' and ``Mysterious No''?
+\begin{description}
+  \item[Solution] \hfill \\
+  The algorithm checks whether the list a is a subset of list A. Thus, it will print ``Mysterious Yes'' if list
+b is a subset of list A and prints ``Mysterious No'' otherwise.
+\end{description}
+\item Try to execute the algorithm on the following lists
+     \begin{verbatim}
+       List A: 1 2 5 8 44
+       List B: 1 2 5 8 44 100 202
+     \end{verbatim}
+According to the functionality of your algorithm, this case can be handled in a more efficient way. Add the
+corresponding statements in the code below for the case where the length of list B is greater than the length
+of list A.
+\vfill
+
+\begin{description}
+  \item[Solution] \hfill \\
+    \lstinputlisting{sol_6_c.py}
+\end{description}
+\vfill
+
+\end{enumerate}
+\end{document}
