@@ -1,0 +1,237 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\begin{document}
+\definecolor{orange}{rgb}{1,0.5,0}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+\lstset{
+language=Python,
+numbers=none,
+breaklines=true,
+breakatwhitespace=false,
+frame=single,
+keepspaces=true,
+columns=flexible,
+tabsize=2,
+showspaces=false,
+showstringspaces=false,
+rulecolor=\color{black},
+keywordstyle=\color{blue},
+commentstyle=\color{darkgreen},
+basicstyle=\footnotesize,
+stringstyle=\color{orange}
+}
+\title{CSEN 102 - Midterm 2012 solutions}
+\maketitle
+
+\section{Conditional}
+Your task is to implement an algorithm that can calculate your maximum heart rate and your optimal
+training pulse for fat-burning, endurance increase or cardiovascular system improvement.
+The Formula for calculating the maximum heart rate (Pulse) depends on the age and the gender:
+\begin{itemize}
+  \item For men: 200 - Age
+  \item For women 226 - Age
+\end{itemize}
+
+The training can be classified into the following zones
+
+\begin{description}
+  \item[Health zone:] This amounts to 50-60\& of the maximum heart rate.
+  Within this pulse range particularly the cardiovascular system will be invigorated. This range is
+  particularly suitable for beginners.
+  \item[Fat burning zone:] This amounts to 60-70\% of the maximum heart rate.
+Within this pulse range, most calories from fat are burned. Furthermore the cardiovascular system
+will be trained.
+\item[Anaerobic zone:] This amounts to 80-90\% of the maximum heart rate.
+Within this pulse range, the body cannot cover the oxygen demand any longer. This range is for
+the development of power and muscle mass.
+
+\item[Red zone:] This amounts to 90-100\% of the maximum heart rate.
+This pulse range should be handled with caution. It is dangerous for beginners and can be harmful
+for the heart.
+\end{description}
+
+\begin{enumerate}[label=(\alph*)]
+  \item Write an algorithm that given the age and the gender should display the different zones. For example,
+your algorithm should display the following for a 45 years old man:
+
+\begin{tabular}{l r}
+  Health zone: & Between 88 and 105 \\
+  Fat-burning zone: & to 122 \\
+  Aerobic zoe: & to 140 \\
+  Anaerobic zone: & to 158 \\
+  Maximum heart rate / Red zone: & to 175 \\
+\end{tabular}
+
+\begin{description}
+  \item[Solution]  \hfill \\
+  \lstinputlisting{sol_1_a.py}
+\end{description}
+
+\newpage
+\item Write an algorithm that given the age, the gender and the heart rate will display the corresponding
+zone. For example, the algorithm should display for a 45 years old man and heart rate of 190, the
+following message
+\begin{verbatim}
+Red Zone
+\end{verbatim}
+Your algorithm should consist of only \emph{if} statements, i.e. you are not allowed to use any \emph{else}
+statements.
+
+\begin{description}
+  \item[Solution]  \hfill \\
+  \lstinputlisting{sol_1_b.py}
+\end{description}
+\end{enumerate}
+
+\newpage
+
+\section{Sequential (a) + Iteration (b)}
+
+Many people begin running because they want to lose weight. As one of the most vigorous exercises
+out there, running is an extremely efficient way to burn calories and drop pounds. However, there
+are other ways to burn calories. In the following several activities are listed to burn around 250
+calories:
+
+\begin{enumerate}[label=(\alph*)]
+  \item
+\begin{description}
+  \item[Dancing:] 52 minutes
+  \item[Doing yoga:] 90 minutes
+  \item[Riding a bike:] 30 minutes
+  \item[Rollerblading:] 18 minutes
+  \item[Running:] 23 minutes
+  \item[Standing while talking on the phone:] 120 minutes
+  \item[Horseback riding:] 57 minutes
+\end{description}
+
+So as you can see, what will only take a few minutes to consume, could take a large amount of time
+to burn off in the gym.
+Assume that burning calories is proportional to the time needed in an activity (which is in general
+not the case), write an algorithm that given the calories will output the activities above with the
+time needed to burn those calories.
+\lstinputlisting{sol_2_a.py}
+\newpage
+ \item A lady decides to lose weight to be prepared for her wedding. Assume that she is able to loose 5\%
+from her weight every month by doing a strict diet.
+
+\begin{enumerate}
+  \item Write an algorithm that given the weight of a lady and her target weight will calculate how
+many months the diet will last.
+\begin{description}
+  \item[Solution] \hfill \\
+  \lstinputlisting{sol_2_b_1.py}
+\end{description}
+\end{enumerate}
+\item Write an algorithm that given the weight, the current date and the date of the wedding will
+calculate the weight of the lady during her wedding day. The date is given by day, month and
+year.
+Your algorithm should display the number of days left to the wedding as well as the weight.
+For simplicity take the integer division of the days left by 30 to get the number of months.
+\begin{description}
+  \item[Solution] \hfill \\
+   \lstinputlisting{sol_2_b_2.py}
+\end{description}
+\end{enumerate}
+
+\newpage
+
+\section{Tracing}
+Given the following Python code fragment:
+\lstinputlisting[frame=none]{example_3.py}
+\begin{enumerate}[label=(\alph*)]
+  \item  What is the output of the code above for a=1, b=2 and c=6. Use a tracing table to trace the while
+loop.
+\begin{description}
+  \item[Solution] \hfill \\
+  \begin{tabular}{| c | c | c | c| }
+    \hline
+    a & b & c & Output so far \\ \hline
+    1 & 2 & 6 & \\ \hline
+    1 & 4 & 3 & 1,4,3 \\ \hline
+    4 & 15 & 1 & 1,4,3,4,16,1 \\ \hline
+    64 & 256 & 0 & 1,4,3,16,1,64,256,0 \\ \hline
+   \end{tabular}
+\end{description}
+\item  What is the value of the b after the execution of the code for any values of a, b and c.
+\begin{description}
+  \item[Solution] \hfill \\
+  The value of the \emph{b} is $ b^{2^i} $ where $ i $ is the number of iterations of the while loop.
+  Since the \emph{c} is divided by 2 in every iteration, the \emph{i} will be equal to $ ceil(\log_2 c) $. Therefore,
+  the value of the \emph{b} after the execution of the code will be $ b^{2^{ceil(\log_2 c)}} $ (Thanks to Dr. Haythem O. Ismail for his help).
+\end{description}
+\end{enumerate}
+
+\newpage
+
+\section{Iteration over Lists}
+\begin{enumerate}[label=(\alph*)]
+  \item Given a list of integers, write an algorithm that checks whether a list is ordered in ascending order
+or not.
+For example for the list consisting of
+\begin{verbatim}
+5 4 12 16 1
+\end{verbatim}
+the algorithm should display
+\begin{verbatim}
+The list is not sorted
+\end{verbatim}
+For the list
+\begin{verbatim}
+5 10 12 16
+\end{verbatim}
+
+the algorithm should display
+\begin{verbatim}
+The list is sorted
+\end{verbatim}
+\textbf{Note:} For the case where the list is not sorted, your algorithm should stop right away. For the
+example above, your algorithm should stop after comparing the 5 with the 4.
+\begin{description}
+  \item[Solution] \hfill \\
+   \lstinputlisting{sol_4_a.py}
+\end{description}
+\newpage
+\item Write an algorithm that uses the following approach to sort a list of positive integers excluding
+zero. Each integer x of the input list will be stored in the index that corresponds to the value of x
+in the output list.
+For example, for the following list
+\begin{center}
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    4 & 3 & 7 & 2 \\
+    \hline
+  \end{tabular}
+\end{center}
+the algorithm should sort the elements in the following list:
+\begin{center}
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    -1 & 2 &3 & 4 & -1 & -1 & 7 \\
+    \hline
+  \end{tabular}
+\end{center}
+and displays the following message
+\begin{verbatim}
+2 3 4 7
+\end{verbatim}
+Please note that -1 stored in an index i means that the element with the value i does not exist in
+the orginal list. Therefore, you are required to fill these cells with -1.
+\newpage
+\begin{description}
+  \item[Solution] \hfill \\
+  \lstinputlisting{sol_4_b.py}
+\end{description}
+\newpage
+\item What is the drawback of the sorting algorithm (one English statement)?
+\begin{description}
+  \item[Solution] \hfill \\
+  The drawback of this algorithm is the inefficeincy in terms of memory storage. For example, if the
+list contains only one number: $ 10^6 $ the list will have $ 10^6 $ cells all filled with $ -1 $
+except for the last cell.
+\end{description}
+\end{enumerate}
+
+\end{document}
